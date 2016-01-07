@@ -1,0 +1,164 @@
+---
+date last update: 2016-01-04
+purpose: 
+  is: 
+    - a learning and development tool
+    - to help teams identify learning goals and measure progress
+  is not: 
+    - a report card tool
+    - a way to compare or judge teams
+    - a way to measure success
+
+guidelines:
+  - Team may self assess their level for each practice, or they can have someone familiar with the model help them.
+  - No level/rank will be a perfect fit, but select the one that most closely resembles how the team typically works.
+  - The next level up defines concrete learning targets for practices. Teams should select goals that will help reach the agreed goal.
+  - Team identifies practices for short term and medium term focus, based on current pain points and the agreed goal.
+
+intended outcomes:
+  - Assessment of current maturity levels
+  - Selection of target practices for improved maturity in short and medium term
+  - Identification of concrete improvement tasks to lead to improved maturity, e.g. "All developer commit changes to mainline at least once per day."
+
+generic levels definitions:
+  - level: 0
+    description: Nothing done. Many practices may be regressive, preventing the team from improving or being successful
+  - level: 1
+    description: Initial awareness and desire exists with minimal efforts put into current practices. No ability to repeat previous success exists.
+  - level: 2
+    description: Early stage-Standards are established and practiced, but can't be reliably repeated without key individuals' knowledge and skills.
+  - level: 3
+    description: Managed repeatable practice is consistently applied (manual & automated) using defined standards and practices, which are understood by all. Expectation is that team will operate in a consistent and predictable manner, but metrics focus on failures and not success.
+  - level: 4
+    description: Product is controlled from end to end using a consistent and repeatable automated process. Metrics are defined and reported, but not necessarily acted on. Team can be meeting targets, but not focused or empowered to keep improving.
+  - level: 5
+    description: Optimised, fully automated, focus on continuous improvement. Metrics are reviewed and action plans implemented to improve performance. The team has the capability and power to decide what needs to be done to improve.
+
+scopes:
+  - scope: Continuous Integration
+    description: Ability to continuously build and test a product release base to ensure individual changes are compatible with other changes made synchronously. This allows the team to manage the rhythm of their work and repeatable release a high quality product on demand.
+    levels:
+    - level: 0
+      description: Discovery of errors made due to incompatibility of the changes happens in production. No standards or practice in place to check for compatibility.
+    - level: 1
+      description: Manual builds are lengthy and often broken at the core functioning level. Integration tests are run manually and infrequently and are usually dependent on the knowledge and skill of individuals. Developers continue to work while errors are occurring in the build. Integration to other systems is ignored. Functional integration within the application occurs late in the release cycle, if at all.
+    - level: 2
+      description: Infrequent builds on a central server may happen regularly (nightly). Infrequent commits are made. Builds can be recreated from source control but requires the knowledge and skill of key individuals.
+    - level: 3
+      description: There is a CI server that runs the build and tests automatically with each check-in. There is use of scripts and other artefacts from a common tool set. The build environment is more complex, with efforts to mimic integration with other systems. The build status is visible to all. When the build breaks, no further check-ins are allowed until the build is fixed.
+    - level: 4
+      description: Build times tracked, made visible and managed. The automatic builds employ multiple stages of testing with deployment into additional environments for different types of testing. Different types of builds are running at varying frequencies and times (E.g. Fast vs. Slow) The team actively manages the build time and their own build environment and is capable of maintaining the build, taking responsibility for this. Code is maintained to impersonate other systems to enable integration testing. The build status is highly visible, along with other metrics. Stories are written at a level that allows frequent check-ins and facilitates a faster delivery cadence.
+    - level: 5
+      description: Each successful build is a release candidate. Focus is on committing more frequently with increasing confidence in the quality of the product. The CI build creates and provisions environments to allow scalability for testing. Tests are run in parallel across multiple machines. The build pipeline extends directly into production.
+
+  - scope: Quality Assurance
+    description: The concept of systematically discovering issues in the delivery of the product quickly with more frequent and shorter feedback cycles to ensure quality. Discovering defects earlier in the development cycle is less costly and easier to fix. Issues are not exposed to the customer as they are identified and resolved prior to that point.
+    levels:
+    - level: 0
+      description: No resources assigned with responsibility for testing. Product is delivered straight to production untested and support deals with the fall out.
+    - level: 1
+      description: Manual testing follows development. Testing is a lengthy process resulting in a questionable level of confidence on the quality of product. Very basic manual tests of final product with little or no regression capability. Unable to repeat tests. Dedicated testers may be assigned; this could be the business doing UAT.
+    - level: 2
+      description: Some test planning and test cases implemented. Some repeatability is possible, reporting is present. Cycles are relatively long and testing is a contiguous time block with defects found and remediated close to release deadlines. Tolerance for defects in production are set, but not enforced. There may be automated testing, but it is done in isolation, using tooling that is difficult to maintain. There is clear separation between testing responsibilities. Definition of "done" does not include automated tests
+    - level: 3
+      description: Dev and test functions are collaborative and testing is part of the delivery team responsibility. Practice is planned to shorten feedback cycles and move more to the front end of delivery cycle. Awareness to build quality in as opposed to finding what is broken. Automation is employed, but not comprehensively or sustainably. Comprehensive unit, component and acceptance tests are automated through a "test first" process. New tests are added to the suite as required. Non-functional requirements are added to the automated test suite. Manual tests are focused on exploratory tests.
+    - level: 4
+      description: Tests are trusted and meaningful to release go live. Efficient and transparent testing practices are driven early in the lifecycle. Testers can and do rotate between teams with minimal interruption to team progress. Test automation is build by entire team based on acceptance criteria developed in tandem with testers. Automation is robust and responsive and potentially modular to allow fast response to new functionality and challenges. Tests are architected to provide the fastest feedback at the appropriate levels and represent the entire user journey. Testing of non functional aspects is always completed using a realistic load and usage pattern. There is automated execution of user acceptance testing.
+    - level: 5
+      description: Production "immune" system detects deployment failures and remediates automatically. Team has advanced awareness of testing practices and selecting those that provide greatest benefit to the product and respond quickly to change. New methodologies, techniques and approaches are explored and applied as appropriate to improve the quality and timeliness of the product. Sustainable test suite that can be managed by multiple teams because everyone understands how it works and the standards for development. Manual testing is limited to areas where automation does not provide added value.
+
+  - scope: Configuration Management
+    description: Ability to track changes made to the artefacts that affect the behaviour of a system and manage multiple contributions to a single artefact. This includes source code, libraries, configuration files, tests, environment descriptions, dependent libraries, database schema, support documentation and anything else required to deliver the product.
+    levels:
+    - level: 0
+      description: Changes are by multiple team members simultaneously without any effort to maintain versions or track who made what change and when. If version control exists, it usually performed by individuals who need the structure to organise the activities they are responsible for. There is no means for a team to roll back to a previous working version.
+    - level: 1
+      description: Version control is recognised as required to maintain stability of the product and is used to manage main development artefacts as source code, build scripts and unit tests. Simultaneous updates to artefacts are difficult and results in conflicts. Maintenance and tracking of changes is not enforced. Uncontrolled branching and versioning is common. The repository usually sits on an unmanaged machine.
+    - level: 2
+      description: The version control system is used consistently for managing some artefacts. Versioning of items requires the knowledge of key individuals who understands how the version control system works. More items are identified as requiring version control, but heavy reliance on manual processes prevents this from happening. Frequency of check-ins varies and may be lengthy. There are systematic ways to resolve conflicts when they occur. There are standards for creating branches, which may be based on releases or some other time based factor. There are standards the team should follow for using the version control system, but these are not enforced. Distributed teams maintain separate repositories. The repository is on managed server and may be backed up.
+    - level: 3
+      description: All items required for configuring all environments are identified. A single tool set for product configuration management has been determined and there is an effort to move all delivery artefacts into version control. Test scripts, libraries and dependencies are managed. All team members are checking in on a regular, frequent basis. The entire team respects the integrity of the repository. Branches are created only to support releases. Repository can be reproduced if it crashes.
+    - level: 4
+      description: All configuration artefacts are identified, managed and versioned together. Changes to dependent systems are pull based. Any team member can create new and retrieve previous versions successfully as required to deploy to any environment. The standard is to develop code on the main trunk. Branches are created rarely and are short lived. Check-ins occur multiple times each day. Distributed teams work against a single repository. Environment specifications are managed and versioned along with all other artefacts.
+    - level: 5
+      description: The change management policy is frequently validated as supporting rapid and reliable release. The team changes practice and items as the product continues to evolve (and there is some standard for how this is accomplished). New versioning tools are assessed and implemented to meet the evolving need of the product release practices. Trunk based development is the standard practice and the team manages releases and features without resorting to branches. The repository is virtual and easily accessed by all team members, regardless of their location.
+
+  - scope: Environments and Deployment
+    description: Availability of appropriate environments for development and testing to ensure the product will work as expected in production. The capability to release into production with minimal work and no disruption to operations and end users.
+    levels:
+    - level: 0
+      description: There are no separate environments for development and testing. Development environments are crowded. Firewall and network issues are often problems.
+    - level: 1
+      description: Manually created and configured environments. Deployment is still mostly manual and requires long working days and overtime by team members to meet deadlines. There is high level of coordination required between functional groups on day of release. Lead time to get the test environment may be weeks to months. An external group maintains the environments. Environments are shared across teams and products, with no control to prevent conflicts.
+    - level: 2
+      description: Repeatable creation and configuration, manual deployment. Standard artefacts are defined and are created by a combination of manual and automated means. Dev and test environments are available for the exclusive use of the team. The environments are not easily replicated and delays occur whenever changes to them are required. There may be a production like environment for nonfunctional testing and system level integration tests, but this is still shared with other teams and delays in feedback occur as a result. Rebuilding the environments is dependant on the knowledge and skills of key individuals.
+    - level: 3
+      description: Automated provisioning with scripted deployments. There is still reliance on individual skills to ensure the deployment will work in production. Test environments are readily available and can be reproduced with manual work and coordination between operational teams. Access to a production like environment is restricted to a small group of closely related application teams and delays at this level are unusual. Isolated environments are available for specific purposes and everyone has access to a suitable environment to complete their work without delay.
+    - level: 4
+      description: Deployments are automated using a deployment automation tool or framework. A single artefact per system is deployed to all environments. Fully automated self service use of development and test environments. Release plans are automatically produced. Root cause analysis performed on all failures. Rollback process is automated. Environment and system health indicators are monitored and reported. 
+    - level: 5
+      description: Continuous deployment pipeline capability exists. Environments are easily replicated on demand as required, using a self-service model to facilitate the optimal feedback cycle time. Environment provisioning and configuration is fully automated, preferably using a cloud based system. Environments are reviewed on a regular basis to simplify and optimise the effective use of the technology stack. Provisioning of is scalable to meet fluctuating demands. Monitoring and infrastructure insight is used to proactively identify events and correct before degradation or problems occur.
+
+  - scope: Data Management
+    description: Ability for everyone to track changes made to the database schema during each deployment, and the effect of the changes. This includes the ability to roll forward and back and version all changes. Database changes should be scripted alongside other deployment artefacts and reusable test data created for all environments.
+    levels:
+    - level: 0
+      description: Database is a black box to the development team. Complete control of data and database is performed by an external team
+    - level: 1
+      description: Data schema and changes are manual, painful, time consuming and need to be carefully coordinated for all environments. Schema updates are often missed and require manual intervention in production. Test data is loosely defined and does not reflect production data.
+    - level: 2
+      description: Database changes are scripted and versioned along with the application in production but managed by a different team. Testing relies on simplistic methods of creating data sets E.g. copies or subsets of production data are used for testing.
+    - level: 3
+      description: Database changes are performed automatically as part of the deployment. Data sets are defined for different purposes in the delivery process e.g. Dev workstation, integration, UAT, load and performance testing. All data sets are scripted and included in the deployment pipeline.
+    - level: 4
+      description: Team has the ability to create production like data for testing upgrades and roll backs of the database. Changes to data structure are made within a sequence and of a size that does not adversely affect the ability to do continuous integration and the deployment pipeline. All database changes are part of the deployment pipeline.
+    - level: 5
+      description: Automatic feedback loop for DB performance and deployment is in place and used to initiate improvements. Tests are performed using isolated data sets that are right sized for the test purpose (earlier environments using smaller data sets)
+
+  - scope: Technical Architecture
+    description: Bigger picture thinking about technical decisions and their net effect on the business ability to change. This is expensive and difficult to change once the technology is in use. This refers to the mechanism that is in place to make the architectural decisions and the decisions around the design of shared resources. Factoring components around business capabilities to reduce the cost and create robustness to allow for speed of movement and risk reduction.
+    levels:
+    - level: 0
+      description: Technical decisions are made ad hoc and there is no vision or long term technical planning. High level of component and heavy use of business logic in hard to test places. Unmanaged dependencies that are not completely understood. Dependencies are not around based around business capabilities. Versioning of dependencies is poorly managed. Code has no automated tests and the architecture does not allow automated unit testing. Architecture only allows big bang release.
+    - level: 1
+      description: Architects write documents, hand them over and do not consult with project teams. They do not worry about implementation details. Product selection is made without consideration of how the product will be implemented. Coupling of code base and dependencies is understood. Awareness of difficulties in automating testing with the current use of logic in hard to test places and other untestable areas of the code base (web forms, static code bases). Architects and developers want to deploy incrementally and begin identifying possible areas of the system to de-couple.
+    - level: 2
+      description: Random pockets of collaboration exist between architects and delivery teams. Occasional solution prototypes are reviewed with delivery teams. Transactional interactions are common - review meetings to ensure the design documents are being followed. De-coupling of high risk/high impact/changing areas of the system. Isolating and encapsulating these parts of the system around business capabilities, which will help define a model for other parts of the system to follow. Keeping logic in testable code. Automating acceptance testing for these changes and their impacting areas of the system. Releasing these parts of the system independently. Some dependencies have a versioning strategy for breaking changes.
+    - level: 3
+      description: Open lines of communication exist between architects and delivery teams. Delivery teams are consulted prior to decisions made on the design. Communication is ad hoc and frequent. Ability to release independently by choice exists for some teams using the current practices for isolating and encapsulating features/services. Team is mature enough to decide when to refactor and architect the system to support any new features or dependencies. Automated testing is added to most of the complex and high value areas of the system. A version strategy exists for dependencies and how to handle breaking changes and API design, but is not always followed.
+    - level: 4
+      description: Architects spend a portion of their time physically located within the product delivery team. There is seamless collaboration and architects are considered part of the team, understanding all aspects required for delivery of the product. Coupling is minimised and managed as a tested service/API contract. Business logic does not exist in hard to test areas. Application has automated unit, integration and acceptance testing where possible and appropriate. Architecture allows you to deploy components independently as a feature or service at any time. Components are designed around business capabilities. New features can be easily added with little impact to the current application (open for extension, closed for modification). Architecture can be measured and reviewed to ensure services and features can be developed sustainably. A version strategy exists for dependencies, how to handle breaking changes and API design, and is usually followed.
+    - level: 5
+      description: Mechanisms are in place for empowering the product team to make architectural and technology decisions because the technical vision is clear and transparent. The architects are fully engaged with the business to enable innovation. Architecture can be measured and tuned for performance. The architecture can be scaled in several ways depending on the needs of the business. Team is empowered to make changes to improve both the build, pipeline and deployment stages of the lifecycle of the architecture to optimise both the whole and local areas. Versioning strategies and API design is well understood and managed by all the teams.
+
+  - scope: Organisational Alignment
+    description: The team's ability to share ideas and work together to improve processes and the product, delivering working software in a faster and more safe manner. Ability of team to share knowledge and skills and determine the course for improvement
+    levels:
+    - level: 0
+      description: No effort to facilitate open and transparent communication. Large teams of individuals perform tasks in isolation. The technical lead is only a nominal position. Sections of code are completely owned by individuals.
+    - level: 1
+      description: Team members perform in functional silos in the delivery process. Waiting for different teams to complete their work is common. No knowledge transfer occurs when the product is released into the production environment. Teams may get together for regular meetings to communicate in a prescribed way (status update). Sections of code are owned by individuals or teams and others do not change it due to a high risk of "breaking" something. There is no continuity of team membership from one iteration to another.
+    - level: 2
+      description: Some collaboration exists between functional teams occurs to help reduce bottlenecks and to move feedback to earlier in the delivery cycle. Knowledge sharing is ad hoc as team members see fit. The product owner is identified and active in delivery.
+    - level: 3
+      description: All functional teams are viewed as members of the product delivery team and are represented in regular product meetings focused on improving delivery. Operations teams provide consultative services to the delivery team. There is a common and consistent practice to improve knowledge sharing between cross-functional skill sets. There is a plan to provide continuity of team composition with sequential iterations.
+    - level: 4
+      description: Operations teams bring their required changes through the deployment pipeline as much as possible. Team members are able to identify and address issues early in the life cycle. The team's success is measured on a common metric related to business success. Technical debt is addressed on an ongoing basis. Mechanisms are in place to address technical leadership across distributed teams.
+    - level: 5
+      description: The business capability to submit changes is the limiting factor on what the product team works on. Business has rich data based on usage patterns and ability to release new products to select end users in production (canary, A/B, etc.). All team members are cross-skilled across technical areas with very little specialisation reliant on individuals.
+
+  - scope: Visibility
+    description: The ability to plan and respond to the product owner's requests for change in a manner that allows a consistent and predictable pace of work that is completely transparent to all.
+    levels:
+    - level: 0
+      description: Unable to discern what was done by whom and why other than by oral history.
+    - level: 1
+      description: Some effort by individuals is put into tracking changes they have made in an effort to manage their own work. Tool sets vary and there is no centralised source of this information. Knowledge of change is lost with departure of individuals.
+    - level: 2
+      description: Limited traceability from requirements to release exists and usually involves referencing multiple sources of information, some of which are manual. A lengthy time is required to trace errors to root cause.
+    - level: 3
+      description: All changes to the product can be traced through a common tool set between teams that includes tracking of approval and test results. Errors can be easily be related to individual changes early in the lifecycle.
+    - level: 4
+      description: All changes and control on any element can be traced end to end. Product owner can specify when specific functionality can be released. Release notes are generated automatically and can be pulled for any release. Workflow items estimations are based on fact and not assumptions
+    - level: 5
+      description: There is complete transparency of what is in each release. The product owner is able to determine when release goes into production and it is no longer dependent on the team's capability to deliver. Evidence of control and decisions made can be generated through automated tool sets used by the product team.

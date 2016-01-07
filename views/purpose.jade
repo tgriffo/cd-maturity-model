@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  .jumbotron
+    h1 Purpose
+
+  h2 Is
+  ul
+    each p in purpose.is
+      li= p
+  h2 Is NOT
+  ul
+    each p in purpose['is not']
+      li= p

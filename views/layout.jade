@@ -1,0 +1,57 @@
+doctype
+html.no-js
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title CD Maturity Model
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    script(src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js")
+    script(src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js")
+    <![endif]-->
+  body
+    nav.navbar.navbar-default( role="navigation" )
+      .navbar-header
+        button.navbar-toggle.collapsed( type="button", data-toggle="collapse", data-target="#navbar-inverse", aria-expanded="false", aria-controls="navbar")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/") CD Maturity Tool
+   
+      #navbar-inverse.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.active: a( href="/") Home
+          li: a( href="/purpose" ) Purpose
+          li: a( href="/guidelines" ) Guidelines
+          li: a( href="/intended-outcomes" ) Intended Outcomes
+          li: a( href="/generic-level-definition" ) Generic Level's Definition
+          li.dropdown
+            a.dropdown-toggle( href="#", data-toggle="dropdown", role="button", aria-expanded="false" ) Scopes
+              span.caret
+            ul.dropdown-menu( role="menu" )
+              li: a( href="/scope/continuous-integration" ) Continuous Integration
+              li: a( href="/scope/quality-assurance" ) Quality Assurance
+              li: a( href="/scope/configuration-management" ) Configuration Management
+              li: a( href="/scope/environments-and-deployment" ) Environments and Deployment
+              li: a( href="/scope/data-management" ) Data Management
+              li: a( href="/scope/technical-architecture" ) Technical Architecture
+              li: a( href="/scope/organisational-alignment" ) Organisational Alignment
+              li: a( href="/scope/visibility" ) Visibility
+
+    <!--[if lt IE 8]>
+    p.browsehappy
+      | You are using an <strong>outdated</strong> browser.
+      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
+      | to improve your experience.
+    <![endif]-->
+
+    .container
+      block content
+
+    script(src='lib/jquery/dist/jquery.min.js')
+    script(src='lib/bootstrap/dist/js/bootstrap.min.js')

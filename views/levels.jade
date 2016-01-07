@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  .jumbotron
+    h1= title
+    p= description
+
+  ul
+    each level in levels
+      li
+        span= level.level + ': '
+        span= level.description
