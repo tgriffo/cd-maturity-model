@@ -1,0 +1,24 @@
+---
+date last update: 2016-01-04
+assessment for: client or project name
+
+assessments:
+  - dataset: date of assessment or project/sub-project
+    description: some description about this dataset
+    scores:
+    - scope: Continuous Integration
+      level: 3
+    - scope: Quality Assurance
+      level: 4
+    - scope: Configuration Management
+      level: 2
+    - scope: Environments and Deployment
+      level: 3
+    - scope: Data Management
+      level: 2
+    - scope: Technical Architecture
+      level: 1
+    - scope: Organisational Alignment
+      level: 0
+    - scope: Visibility
+      level: 5

@@ -1,0 +1,46 @@
+extends layout
+
+block append foot-scripts
+  script(src='/lib/Chart.js/Chart.min.js')
+
+block content
+  .jumbotron
+    h1 My Maturity Level
+    p
+      | This page displays the assessment levels in a graphic way.
+      | The assessment data is located in the /data/assessment.yaml file.
+      | Editing this file directly will change the data displayed on this page.
+
+  .content
+    canvas(id="chart", width="400", height="400")
+
+  block append foot-scripts
+    script.
+      var ctx = $("#chart").get(0).getContext("2d");
+      var data = {
+          labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+          datasets: [
+              {
+                  label: "My First dataset",
+                  fillColor: "rgba(220,220,220,0.2)",
+                  strokeColor: "rgba(220,220,220,1)",
+                  pointColor: "rgba(220,220,220,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(220,220,220,1)",
+                  data: [65, 59, 90, 81, 56, 55, 40]
+              },
+              {
+                  label: "My Second dataset",
+                  fillColor: "rgba(151,187,205,0.2)",
+                  strokeColor: "rgba(151,187,205,1)",
+                  pointColor: "rgba(151,187,205,1)",
+                  pointStrokeColor: "#fff",
+                  pointHighlightFill: "#fff",
+                  pointHighlightStroke: "rgba(151,187,205,1)",
+                  data: [28, 48, 40, 19, 96, 27, 100]
+              }
+          ]
+      };
+      var options = {};
+      var myRadarChart = new Chart(ctx).Radar(data, options);

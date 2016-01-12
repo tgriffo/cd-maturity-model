@@ -1,11 +1,11 @@
 var express = require('express');
-var data = require('../data')
+var model   = require('../data').model;
 
 var router = express.Router();
 
 /* GET purpose page. */
 router.get('/', function(req, res, next) {
-  res.render('purpose', { purpose: data.purpose });
+  res.render('purpose', { purpose: model.purpose });
 });
 
 module.exports = router;

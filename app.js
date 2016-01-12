@@ -9,7 +9,9 @@ var routes = require('./routes/index');
 var purpose = require('./routes/purpose');
 var guidelines = require('./routes/guidelines');
 var intendedOutcomes = require('./routes/intended-outcomes');
-var levels = require('./routes/levels');
+var scope = require('./routes/levels').scope;
+var genericLevelDefinition = require('./routes/levels').genericLevelDefinition;
+var maturityLevel = require('./routes/maturity-level');
 
 var app = express();
 
@@ -18,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,21 +34,20 @@ app.use(require('node-sass-middleware')({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
 
+// used to provide every page with a 'url' variable
+// particularly useful for the 'navbar-item' mixin on layout.jade
+app.use(function (req, res, next) {
+  res.locals = { url: req.url };
+  next();
+});
+
 app.use('/', routes);
 app.use('/purpose', purpose);
 app.use('/guidelines', guidelines);
 app.use('/intended-outcomes', intendedOutcomes);
-
-app.use('/generic-level-definition',          levels['generic-levels-definitions']);
-
-app.use('/scope/continuous-integration',      levels['continuous-integration']);
-app.use('/scope/quality-assurance',           levels['quality-assurance']);
-app.use('/scope/configuration-management',    levels['configuration-management']);
-app.use('/scope/environments-and-deployment', levels['environments-and-deployment']);
-app.use('/scope/data-management',             levels['data-management']);
-app.use('/scope/technical-architecture',      levels['technical-architecture']);
-app.use('/scope/organisational-alignment',    levels['organisational-alignment']);
-app.use('/scope/visibility',                  levels['visibility']);
+app.use('/generic-level-definition', genericLevelDefinition);
+app.use('/scope', scope);
+app.use('/maturity-level', maturityLevel);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,9 +57,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
-// development error handler
-// will print stacktrace
+// development error handler will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -69,8 +68,7 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// production error handler: no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {

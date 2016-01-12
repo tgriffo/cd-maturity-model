@@ -1,10 +1,10 @@
 var express = require('express');
-var data = require('../data')
+var model   = require('../data').model
 
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('guidelines', { guidelines: data.guidelines });
+  res.render('guidelines', { guidelines: model.guidelines });
 });
 
 module.exports = router;

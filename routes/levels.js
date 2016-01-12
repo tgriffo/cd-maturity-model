@@ -1,39 +1,38 @@
 var express = require('express');
-var data = require('../data')
 
-var generic = express.Router();
-var scopeCI,
-    scopeQA,
-    scopeCM,
-    scopeED,
-    scopeDM,
-    scopeTA,
-    scopeOA,
-    scopeVi;
+var model   = require('../data').model;
 
-generic.get('/', function(req, res, next) {
+var genericLevelDefinition = express.Router();
+var scope                  = express.Router();
+
+genericLevelDefinition.get('/', function(req, res, next) {
   res.render('levels', { 
     title       : 'Generic Level\'s Definition',
     description : '',
-    levels      : data['generic levels definitions'] 
+    levels      : model['generic levels definitions'] 
   });
 });
 
-scopeCI = createRouterForScope('Continuous Integration');
-scopeQA = createRouterForScope('Quality Assurance');
-scopeCM = createRouterForScope('Configuration Management');
-scopeED = createRouterForScope('Environments and Deployment');
-scopeDM = createRouterForScope('Data Management');
-scopeTA = createRouterForScope('Technical Architecture');
-scopeOA = createRouterForScope('Organisational Alignment');
-scopeVi = createRouterForScope('Visibility');
+scope.get('/:scope', function(req, res, next) {
+  var scopeTitle = req.params.scope;
+  var scope = findScope(model, scopeTitle);
+
+  if (scope) {
+    res.render('levels', { 
+      title       : scope.scope,
+      description : scope.description,
+      levels      : scope.levels
+    });
+  }
+  next();
+});
 
 function createRouterForScope(scopeTitle) {
   var router = express.Router();
   router.get('/', function(req, res, next) {
-    var scope = findScope(data, scopeTitle);
+    var scope = findScope(model, scopeTitle);
     res.render('levels', { 
-      title       : scopeTitle,
+      title       : scope.scope,
       description : scope.description,
       levels      : scope.levels
     });
@@ -42,24 +41,12 @@ function createRouterForScope(scopeTitle) {
 }
 
 function findScope(data, scope) {
-  var ret = {};
-  data.scopes.forEach(function (item) {
-    if (item.scope && item.scope === scope) {
-      ret = item;
-      return;
-    }
+  return data.scopes.find(function (elem, index, array) {
+    return elem.scope.toLowerCase().replace(new RegExp(' ', 'g'), '-') === scope;
   });
-  return ret;
 }
 
 module.exports = {
-  'generic-levels-definitions'  : generic,
-  'continuous-integration'      : scopeCI,
-  'quality-assurance'           : scopeQA,
-  'configuration-management'    : scopeCM,
-  'environments-and-deployment' : scopeED,
-  'data-management'             : scopeDM,
-  'technical-architecture'      : scopeTA,
-  'organisational-alignment'    : scopeOA,
-  'visibility'                  : scopeVi
+  scope                  : scope,
+  genericLevelDefinition : genericLevelDefinition
 };
