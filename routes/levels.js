@@ -23,8 +23,9 @@ scope.get('/:scope', function(req, res, next) {
       description : scope.description,
       levels      : scope.levels
     });
+  } else {
+    next();
   }
-  next();
 });
 
 function createRouterForScope(scopeTitle) {

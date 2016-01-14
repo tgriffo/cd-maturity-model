@@ -64,10 +64,23 @@ describe('views', function () {
       done();
     });
   });
+  
+  it('responds with 404 to unknown /scopes/[unknown]', function testUnknownScope(done) {
+    request(server)
+      .get('/scope/unknown')
+      .expect(404, done);
+  });
 
   it('responds to /maturity-level', function testMaturityLevel(done) {
     request(server)
       .get('/maturity-level')
+      .expect(200, done);
+  });
+
+  it('responds to /maturity-level/data', function testMaturityLevelDataJson(done) {
+    request(server)
+      .get('/maturity-level/data')
+      .expect('Content-Type', /json/)
       .expect(200, done);
   });
 });
